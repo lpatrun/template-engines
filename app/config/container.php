@@ -30,6 +30,10 @@ return [
         'home' => [
             'handler' => ['ExampleApp\Controller\HomeController', 'index'],
             'method' => 'GET'
+        ],
+        'task' => [
+            'handler' => ['ExampleApp\Controller\HomeController', 'templateEnginesTask'],
+            'method' => 'GET'
         ]
     ]
 ];

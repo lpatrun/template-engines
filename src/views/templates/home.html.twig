@@ -1,2 +1,54 @@
-<!-- TWIG home page -->
-<!-- https://twig.symfony.com/doc/3.x/ -->
+{% extends 'main_layout.html.twig' %}
+
+{% block page_title %}
+	{{ passed_values.data.title }}
+{% endblock %}
+
+{% block content_navigation %}
+	{% for key, value in passed_values.data %}
+		{% if key == 'navigation' %}
+			{% for item in value %}
+				<li>{{ item.text }}</li>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block page_main %}
+	{{ passed_values.data.title }}
+{% endblock %}
+
+{% block page_item %}
+  {% for key, value in passed_values.data %}
+    {% if key == 'products' %}
+      {% for item in value %}
+        <div class="item">
+          <img src="{{item.image.thumbnail}}" alt="">
+          <div class="item__title">
+            <h3>{{ item.name }}</h3>
+          </div>
+          <div class="item__desc">
+            <p>
+              {{ item.description }}
+            </p>
+          </div>
+          <div class="item__bottom">
+            <div class="heart">
+              <svg>
+                <use href="/img/icons.svg#icon-heart-outlined" style="color: aqua;"></use>
+              </svg>
+            </div>
+            <div class="item__price">
+              <div class="item__old-price">
+                <p>{{ item.regularPrice }}</p>
+              </div>
+              <div class="item__new-price">
+                <p>€ 290</p>
+              </div>
+            </div>
+          </div>
+        </div> 
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}

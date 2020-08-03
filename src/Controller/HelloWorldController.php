@@ -25,16 +25,15 @@ class HelloWorldController extends BaseController
 
     public function helloTwigView()
     {
+
         $loader = new FilesystemLoader([$GLOBALS['viewDir'], $GLOBALS['layoutDir']]);
         $twig = new Environment($loader);
+      
 
         try {
+            $json = file_get_contents(dirname(__DIR__).'/data2.json');
             $this->response->getBody()->write(
-                $twig->render('hello_world.html.twig',
-                [
-                    'passed_values' => $this->passValues()
-                ])
-            );
+                $twig->render('hello_world.html.twig',['passed_values' => json_decode($json, true)]));
         } catch (LoaderError $e) {
             $this->response->getBody()->write($e->getMessage());
         } catch (RuntimeError $e) {
