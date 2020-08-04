@@ -11,6 +11,18 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
+a, a:visited, a:active {
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .container {
 }
 
@@ -78,6 +90,10 @@ li {
   border: 2px solid #e5e5e5;
   background: #ffffff;
   padding: 10px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
 }
 
 .item img {
@@ -88,13 +104,18 @@ li {
   margin: 10px 0;
 }
 
+.item__desc {
+  margin-bottom: 25px;
+}
+
 .item__bottom {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 15px 0;
+  margin-top: auto;
 }
 
-.heart {
+.heart--empty {
   height: 40px;
   width: 40px;
   background: rgba(133, 178, 255, 0.5);
@@ -102,9 +123,21 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
-.heart svg {
+.heart--full {
+  height: 40px;
+  width: 40px;
+  background: #85B2FF;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.heart--empty svg, .heart--full svg {
   fill: white;
   height: 25px;
   width: 25px;
@@ -124,4 +157,46 @@ li {
 
 .item__new-price {
   font-size: 18px;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown a:hover {
+    color: #85B2FF
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 23px;
+  left: 0px;
+}
+
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+
+.dropdown-content a {
+  color: white;
+  margin: 5px 16px;
+  padding: 5px 11px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  border-bottom: 1px solid #fff;
+}
+
+.dropdown-content a:hover {
+  color: #85B2FF
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none
 }

@@ -8,7 +8,19 @@
 	{% for key, value in passed_values.data %}
 		{% if key == 'navigation' %}
 			{% for item in value %}
-				<li>{{ item.text }}</li>
+
+        {% if item.items == null %}
+				<li><a href="#">{{ item.text }}</a></li>
+
+        {% elseif item.items != null %}
+        <li class="dropdown"><a href="#">{{ item.text }}</a>
+          <div class="dropdown-content">
+          {% for item in item.items %}
+            <a href="#">{{ item.text }}</a>
+          {% endfor %}
+          </div>  
+        </li>
+        {% endif %}
       {% endfor %}
     {% endif %}
   {% endfor %}
@@ -33,18 +45,37 @@
             </p>
           </div>
           <div class="item__bottom">
-            <div class="heart">
+
+          {% if item.favorite == true %}
+            <div class="heart--full">
+              <svg>
+                <use href="/img/icons.svg#icon-heart" style="color: aqua;"></use>
+              </svg>
+            </div>
+          {% elseif item.favorite == false %}
+            <div class="heart--empty">
               <svg>
                 <use href="/img/icons.svg#icon-heart-outlined" style="color: aqua;"></use>
               </svg>
             </div>
+          {% endif %}
+
             <div class="item__price">
-              <div class="item__old-price">
-                <p>{{ item.regularPrice }}</p>
-              </div>
-              <div class="item__new-price">
-                <p>€ 290</p>
-              </div>
+
+              {% if item.specialPrice is not null %}
+                <div class="item__old-price">
+                  <p>{{ item.regularPrice }}</p>
+                </div>
+                <div class="item__new-price">
+                  <p>{{ item.specialPrice }}</p>
+                </div>
+              
+
+              {% elseif item.specialPrice is null %}
+                <div class="item__new-price">
+                  <p>{{ item.regularPrice }}</p>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div> 
