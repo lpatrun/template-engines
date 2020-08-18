@@ -1,0 +1,30 @@
+{% extends 'finalLayout.html.twig' %}
+
+{% block page_title %}
+	{{ passed_values.data.title }}
+{% endblock %}
+
+{% block content_navigation %}
+	{% for key, value in passed_values.data %}
+		{% if key == 'navigation' %}
+			{% for item in value %}
+
+				{% if item.items == null %}
+					<li>
+						<a href="#">{{ item.text }}</a>
+					</li>
+
+				{% elseif item.items != null %}
+					<li class="dropdown">
+						<a href="#">{{ item.text }}</a>
+						<div class="dropdown-content">
+							{% for item in item.items %}
+								<a href="#">{{ item.text }}</a>
+							{% endfor %}
+						</div>
+					</li>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+{% endblock %}
